@@ -1,0 +1,42 @@
+<div class="time-entries">
+  <a
+      routerLink="/create"
+      class="btn btn-primary">
+      创建
+  </a>
+  <div *ngIf="plans.length==0">
+    <h2>还没有任何计划</h2>
+  </div>
+  <div class="list-group">
+    <a class="list-group-item" *ngFor="let plan of plans">
+      <div class="row">
+        <div class="col-sm-2 user-details">
+          <img src="http://pic.dfhon.com/pictures/20100401/141048.jpg" class="avatar img-circle img-responsive" />
+          <p class="text-center">
+            <strong>
+             {{plan.name}}
+            </strong>
+          </p>
+        </div>
+        <div class="col-sm-2 text-center time-block">
+          <h3 class="list-group-item-text total-time">
+            <i class="glyphicon glyphicon-time"></i>
+            {{plan.totalTime}}
+          </h3>
+          <p class="label label-primary text-center">
+            <i class="glyphicon glyphicon-calendar"></i>
+            {{plan.date | dataFormat}}
+          </p>
+        </div>
+        <div class="col-sm-7 comment-section">
+          {{plan.comment}}
+        </div>
+        <div class="col-sm-1">
+          <button class="btn btn-xs btn-danger delete-button" (click)="deletePlan(plan)">
+          X
+          </button>
+        </div>
+      </div>
+    </a>
+  </div>
+</div>
