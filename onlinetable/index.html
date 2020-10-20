@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>onlineTable</title>
+  <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <style type="text/css" media="screen">
+    caption{
+      text-align: center;
+      font-weight: bold;
+    }  
+    thead{
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+    <h3>在线填表格测试</h3>
+    <p>说明：这是一个多人在线实时填表系统,状态为“有人编辑”表示有其他人正在编辑这行，你可以单击“可编辑”状态的按钮编辑这一行，编辑完成后请点击完成按钮
+    </p>
+    <p>本次测试你的座右铭和最爱干嘛</p>
+	 <div id="tableCon">
+     
+   </div>
+   
+</body>
+</html>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  window.onload=function(){
+    var tableCon = document.getElementById('tableCon');
+    var cols;
+    var socket = io();
+    socket.on('serverChange', function (data) {
+      var data = data.data[0].data;
+      drawTable(data);
+    });
+  
+    socket.on('broadcast',function(res){
+      var btn = document.getElementById('btn'+res.data);
+      if(btn){
+        if(btn.dataset['cat'] == 'edit'){
+          var boo = btn.disabled;
+          if(boo){
+            btn.disabled = false;
+            btn.parentElement.previousElementSibling.innerHTML = "可编辑";
+          }else{
+            btn.parentElement.previousElementSibling.innerHTML = "有人编辑";
+            btn.disabled = 'disabled';
+          }
+        }
+      }
+    });
+
+    tableCon.addEventListener('click',function(e){  //点击编辑进入编辑状态
+      var target = e.target;
+      var dataset = target.dataset;
+      var tBody,dataRows,theRow,theCells;
+      if(dataset['cat']=='edit' || dataset['cat']=='complete'){
+        tBody = document.getElementById('tBody');
+        dataRows = dataset['id'];  //实际数据行数
+        theRow = tBody.rows[dataRows-2];
+        theCells = theRow.children;
+      }
+    
+    if(dataset['cat']=='edit'){
+      socket.emit('enter',{'dataRows':dataRows});
+      for(var i = 0;i<cols;i++){
+        var originData = theCells[i].innerHTML;
+        var str = "<input class='form-control' type='text' name='name"+i+"' id='da"+i+"' value='"+originData+"'>";
+        theCells[i].innerHTML = str;
+      }
+      target.dataset['cat'] = 'complete';
+      target.innerHTML = "完成";
+    }else if(dataset['cat'] == 'complete'){
+        var newData = [];
+        for(var i = 0;i<cols;i++){
+          newData.push(theCells[i].children[0].value);
+          theCells[i].innerHTML = theCells[i].children[0].value;
+        }
+
+        var sendData = {};
+        sendData['data'] = newData;
+        sendData['id'] = dataRows;
+        socket.emit('datachange',sendData); //向服务器发送事件，携带数据
+        target.dataset['cat'] = 'edit';
+        target.innerHTML = "编辑";
+    }
+  },false);
+
+
+  //表格绘制
+  function drawTable(data){
+    var table = document.createElement('table');
+    table.id = "mytable";
+    table.classList.add('table');
+    table.classList.add('table-hover');
+    table.classList.add('table-responsive');
+    var caption = table.createCaption();
+    var captionTxt = data[0][0];
+    var tHead = table.createTHead();
+    var tBody = document.createElement('tbody');
+        tBody.id = 'tBody';
+    caption.appendChild(document.createTextNode(captionTxt));
+    tHead.insertRow(0);
+    cols = data[1].length-1;   //列数
+    var totalRows = data.length;  //总行数，含表头
+    for(var i = 0;i<cols;i++){
+      tHead.rows[0].insertCell(i).appendChild(document.createTextNode(data[1][i]));
+    }
+    tHead.rows[0].insertCell(cols).appendChild(document.createTextNode('状态'));
+    tHead.rows[0].insertCell(cols+1).appendChild(document.createTextNode('编辑'));
+
+    for(var i=2;i<totalRows;i++){
+      tBody.insertRow(i-2);
+      for(var j=0;j<cols;j++){
+        tBody.rows[i-2].insertCell(j).appendChild(document.createTextNode(data[i][j]));
+      }
+      if(data[i][cols] ==0){
+        tBody.rows[i-2].insertCell(cols).innerHTML ="可编辑";
+        tBody.rows[i-2].insertCell(cols+1).innerHTML = "<button class='btn btn-primary' id=btn"+i+"  data-cat='edit' data-id='"+(i)+"'>编辑</button>";
+      }else{
+         tBody.rows[i-2].insertCell(cols).innerHTML ="有人编辑";
+         tBody.rows[i-2].insertCell(cols+1).innerHTML = "<button class='btn btn-primary' id=btn"+i+" disabled='disabled' data-cat='edit' data-id='"+(i)+"'>编辑</button>";
+      }
+    }
+    table.appendChild(tBody);
+    if(document.getElementById('mytable')){
+      tableCon.replaceChild(table,document.getElementById('mytable'));
+    }else{
+      tableCon.appendChild(table);
+    }  
+  }
+
+  }
+</script>
