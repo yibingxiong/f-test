@@ -1,0 +1,22 @@
+# 已经阅读过的方法
+
+1. add
+2. after
+3. at
+4. attempt
+5. before
+6. camelCase
+7. captitalize
+8. castArray
+9. ceil
+10. chunk
+11. clamp
+12. clone
+13. cloneDeep
+14. cloneDeepWith
+15. compact
+16. cond
+17. conforms
+18. conformsTo
+19. countBy
+20. create
