@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>工作台</title>
+    <link rel="stylesheet" href="../../assets/css/bootstrap.css">
+    <style>
+        .ftp-conf {
+            margin: 0 15px;
+        }
+        .row-2 {
+            margin-top: 15px;
+        }
+        #list {
+            width: 100%;
+            margin-top: 20px;
+        }
+        #conf {
+            position: fixed;
+            padding-top: 20px;
+            top: 0;
+            background: #fff;
+            width: 100%;
+        }
+        body {
+            padding-top: 110px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid wrap">
+        <form class="form-inline" id="conf">
+            <div class="container-fluid">
+            <div class="row">
+                <div class="form-group">
+                    <label for="cur-project">当前项目目录:</label>
+                    <select name="cur-project" id="cur-project" class="form-control">
+                    </select>
+                </div>
+                <div class="form-group ftp-conf">
+                    <label for="cur-ftp">当前FTP:</label>
+                    <select name="cur-ftp" id="cur-ftp" class="form-control">
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>
+                        状态
+                    </label>
+                    <span id="ftp-status">正在连接</span>
+                </div>
+            </div>
+            <div class="row row-2">
+                <div class="form-group">
+                    <label for="opt-type">筛选</label>
+                    <select name="opt-type" id="opt-type" class="form-control">
+                        <option value="all">all</option>
+                        <option value="js">js</option>
+                        <option value="css">css</option>
+                        <option value="img">img</option>
+                    </select>
+                </div>
+                <button id="upload-selected" class="btn btn-primary">上传</button>
+                <!-- <button id="sync-selected" class="btn btn-primary">同步</button> -->
+                <button id="up-prod-selected" class="btn btn-primary">上线</button>
+            </div>
+        </div>
+        </form>
+    <div class="container-fluid">
+        <div class="row">
+            <table class="table table-striped table-bordered table-hover" id="list">
+            </table>
+        </div>
+    </div>
+    
+    </div>
+    <script>
+        // You can also require other files to run in this process
+        require('./index.js')
+    </script>
+</body>
+
+</html>

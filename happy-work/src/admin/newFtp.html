@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>新建ftp服务器</title>
+    <link rel="stylesheet" href="../../assets/css/bootstrap.css">
+    <style>
+        body {
+            padding-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label for="ip" class="col-sm-2 control-label">ip</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="ip" placeholder="ip">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="port" class="col-sm-2 control-label">端口号</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="port" placeholder="端口号">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="username" class="col-sm-2 control-label">用户名</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="username" placeholder="用户名">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="password" class="col-sm-2 control-label">密码</label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control" id="password" placeholder="密码">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button id="confirm" class="btn btn-primary">确定</button>
+            </div>
+        </div>
+    </form>
+</body>
+<script>
+    // const eleLocalStorage = require('electron-localstorage');
+    // const localStorage = eleLocalStorage;
+    const { ipcRenderer } = require('electron');
+    const path = require('path');
+    window.onload = function () {
+        function getEle(id) {
+            return document.getElementById(id)
+        }
+        getEle('confirm').onclick = (e) => {
+            e.preventDefault();
+            let ip = getEle('ip').value;
+            let port = getEle('port').value;
+            let username = getEle('username').value;
+            let password = getEle('password').value;
+            if (!ip) {
+                alert('ip必填');
+                return;
+            }
+            if (!port) {
+                alert('port必填');
+                return;
+            }
+            if (!username) {
+                alert('username必填');
+                return;
+            }
+            if (!password) {
+                alert('password必填');
+                return;
+            }
+            // if(!/((?:(?:25[0-5]|2[0-4]\d|((1\d{2})|([1-9]?\d)))\.){3}(?:25[0-5]|2[0-4]\d|((1\d{2})|([1-9]?\d))))/.test(ip)) {
+            //     alert('ip不对');
+            //     return;
+            // }
+
+            let oldStr = localStorage.getItem('ftps') || '{}';
+            let oldObj = JSON.parse(oldStr);
+            oldObj[`${ip}:${port}`] = {
+                ip,
+                port,
+                username,
+                password
+            }
+            let newStr = JSON.stringify(oldObj);
+            localStorage.setItem('ftps', newStr);
+            localStorage.setItem('curFtp', JSON.stringify(oldObj[`${ip}:${port}`]));
+            ipcRenderer.send('jump', `${__dirname}/ftp.html`);
+        }
+    }
+</script>
+
+</html>

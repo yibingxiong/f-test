@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ftp服务器管理</title>
+    <link rel="stylesheet" href="../../assets/css/bootstrap.css">
+    <style type="text/css">
+        body {
+            word-break: break-all;
+            padding-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <table id="ftp-list" class="table table-striped table-bordered table-hover" id="project-list">
+                </table>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <button id="create-btn" class="btn btn-primary">新建</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        // const eleLocalStorage = require('electron-localstorage');
+        // const localStorage = eleLocalStorage;
+        function getEle(id) {
+            return document.getElementById(id)
+        }
+
+        function deleteFtp(id) {
+            let oldStr = localStorage.getItem('ftps') || '';
+            let oldObj = JSON.parse(oldStr);
+            let curFtpStr = localStorage.getItem('curFtp') || '{}';
+            let curFtp = JSON.parse(curFtpStr);
+
+            if (oldObj[id]) {
+                delete oldObj[id];
+            }
+            
+            if (`${curFtp.ip}:${curFtp.port}` === id) {
+                localStorage.removeItem('curFtp');
+            }
+
+            let newStr = JSON.stringify(oldObj);
+            localStorage.setItem('ftps', newStr);
+        }
+        // 渲染列表
+        function renderList() {
+            let listStr = localStorage.getItem('ftps') || '{}';
+            let listObj = JSON.parse(listStr);
+            let renderHtml =
+                `<tr>
+                        <th>ip</th>
+                        <th>端口</th>
+                        <th>用户名</th>
+                        <th>密码</th>
+                        <th>操作</th>
+                    </tr>`;
+
+            for (let key in listObj) {
+                let data = listObj[key];
+                renderHtml +=
+                    `
+                    <tr>
+                        <td>${data.ip}</td>
+                        <td>${data.port}</td>
+                        <td>${data.username}</td>
+                        <td>*******</td>
+                        <td><span class="delete-btn" key=${key}>删除</span></td>
+                    </tr>
+                    `
+            }
+            getEle('ftp-list').innerHTML = renderHtml;
+            setTimeout(() => {
+                let deleteEles = document.querySelectorAll('.delete-btn');
+                if (deleteEles) {
+                    for (let i = 0; i < deleteEles.length; i++) {
+                        deleteEles[i].addEventListener('click', (e) => {
+                            let target = e.target;
+                            let key = target.getAttribute('key');
+                            deleteFtp(key);
+                            renderList();
+                        })
+                    }
+                }
+            }, 100);
+
+        }
+        window.onload = () => {
+            const { ipcRenderer } = require('electron');
+            const path = require('path');
+
+            // 点击新建
+            getEle('create-btn').addEventListener('click', () => {
+                console.log('新建ftp服务器');
+                ipcRenderer.send('jump', `${__dirname}/newFtp.html`)
+            }, false);
+
+            renderList();
+        }
+    </script>
+</body>
+
+</html>

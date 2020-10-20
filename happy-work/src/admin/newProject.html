@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>新建项目</title>
+    <link rel="stylesheet" href="../../assets/css/bootstrap.css">
+</head>
+<style>
+    body {
+        padding-top: 20px;
+    }
+</style>
+<body>
+
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label for="name" class="col-sm-2 control-label">项目名称</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="name" placeholder="项目名称">
+            </div>
+        </div>
+        <div class="form-group">
+            <label  class="col-sm-12 control-label" for="" style="text-align:center;">本地路径配置</label>
+        </div>
+        <div class="form-group">
+            <label for="localCssPath" class="col-sm-2 control-label">css本地路径</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="localCssPath" placeholder="css本地路径">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="localJsPath" class="col-sm-2 control-label">js本地路径</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="localJsPath" placeholder="js本地路径">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="localImgPath" class="col-sm-2 control-label">img本地路径</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="localImgPath" placeholder="img本地路径">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-12 control-label" style="text-align:center;" for="">测试路径配置</label>
+        </div>
+        <div class="form-group">
+            <label for="remoteCssPath" class="col-sm-2 control-label">css远程路径</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="remoteCssPath" placeholder="css远程路径">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="remoteJsPath" class="col-sm-2 control-label">js远程路径</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="remoteJsPath" placeholder="js远程路径">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="remoteImgPath" class="col-sm-2 control-label">img远程路径</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="remoteImgPath" placeholder="img远程路径">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-12 control-label" style="text-align:center;" for="">线上路径配置(实际是本地路径)</label>
+        </div>
+        <div class="form-group">
+            <label for="onlineCssPath" class="col-sm-2 control-label">css线上路径</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="onlineCssPath" placeholder="css线上路径">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="onlineJsPath" class="col-sm-2 control-label">js线上路径</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="onlineJsPath" placeholder="js线上路径">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="onlineImgPath" class="col-sm-2 control-label">img线上路径</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="onlineImgPath" placeholder="img线上路径">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button id="confirm-btn" class="btn btn-primary">确定</button>
+            </div>
+        </div>
+    </form>
+    <script>
+        // const eleLocalStorage = require('electron-localstorage');
+        // const localStorage = eleLocalStorage;
+        const { ipcRenderer } = require('electron');
+        function getEle(id) {
+            return document.getElementById(id)
+        }
+        window.onload = function () {
+            getEle('confirm-btn').addEventListener('click', (e) => {
+                e.preventDefault();
+                let name = getEle('name').value;
+                let localCssPath = getEle('localCssPath').value;
+                let localJsPath = getEle('localJsPath').value;
+                let localImgPath = getEle('localImgPath').value;
+                let remoteCssPath = getEle('remoteCssPath').value;
+                let remoteJsPath = getEle('remoteJsPath').value;
+                let remoteImgPath = getEle('remoteImgPath').value;
+                let onlineCssPath = getEle('onlineCssPath').value;
+                let onlineJsPath = getEle('onlineJsPath').value;
+                let onlineImgPath = getEle('onlineImgPath').value;
+                if (
+                    !localCssPath ||
+                    !localJsPath ||
+                    !localImgPath ||
+                    !remoteCssPath ||
+                    !remoteJsPath ||
+                    !remoteImgPath
+                ) {
+                    alert('前7个字段都要填');
+                    return;
+
+                }
+
+                let oldStr = localStorage.getItem('projects') || '{}';
+                let oldObj = JSON.parse(oldStr);
+                oldObj[name] = {
+                    name,
+                    localCssPath,
+                    localJsPath,
+                    localImgPath,
+                    remoteCssPath,
+                    remoteJsPath,
+                    remoteImgPath,
+                    onlineCssPath,
+                    onlineJsPath,
+                    onlineImgPath
+                };
+                let newStr = JSON.stringify(oldObj);
+                localStorage.setItem('projects', newStr);
+                localStorage.setItem('curProject', JSON.stringify(oldObj[name]));
+                ipcRenderer.send('jump', `${__dirname}/project.html`);
+            })
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>项目管理</title>
+    <link rel="stylesheet" href="../../assets/css/bootstrap.css">
+    <style type="text/css">
+        body {
+            word-break: break-all;
+            padding-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-striped table-bordered table-hover" id="project-list">
+                </table>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <button id="new-project" class="btn btn-primary">新建</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // const eleLocalStorage = require('electron-localstorage');
+        // const localStorage = eleLocalStorage;
+        function getEle(id) {
+            return document.getElementById(id)
+        }
+        // 删除操作
+        function deleteProject(name) {
+            let oldStr = localStorage.getItem('projects') || '{}';
+            let curProjectStr = localStorage.getItem('curProjectStr') || '{}';
+            let curProject  = JSON.parse(curProjectStr);
+            let oldObj = JSON.parse(oldStr);
+            if (oldObj[name]) {
+                delete oldObj[name];
+            }
+
+            if (curProject.name === name) {
+                localStorage.removeItem('curProject');
+            }
+            let newStr = JSON.stringify(oldObj);
+            localStorage.setItem('projects', newStr);
+        }
+        // 渲染列表
+        function renderList() {
+            let listStr = localStorage.getItem('projects') || '{}';
+            let listObj = JSON.parse(listStr);
+            let renderHtml =
+                `<tr>
+                    <th>项目名称</th>
+                    <th>css本地路径</th>
+                    <th>js路径</th>
+                    <th>img路径</th>
+                    <th>css的ftp路径</th>
+                    <th>js的ftp路径</th>
+                    <th>img的ftp路径</th>
+                    <th>css的svn路径</th>
+                    <th>js的svn路径</th>
+                    <th>img的svn路径</th>
+                    <th>操作</th>
+                </tr>`;
+
+            for (let key in listObj) {
+                let data = listObj[key];
+                renderHtml +=
+                    `
+                    <tr>
+                        <td>${data.name}</td>
+                        <td>${data.localCssPath}</td>
+                        <td>${data.localJsPath}</td>
+                        <td>${data.localImgPath}</td>
+                        <td>${data.remoteCssPath}</td>
+                        <td>${data.remoteJsPath}</td>
+                        <td>${data.remoteImgPath}</td>
+                        <td>${data.onlineCssPath || '貌似没配置'}</td>
+                        <td>${data.onlineJsPath || '貌似没配置'}</td>
+                        <td>${data.onlineImgPath || '貌似没配置'}</td>
+                        <td><span class="delete-btn" key=${key}>删除</span></td>
+                    </tr>
+                    `
+            }
+            getEle('project-list').innerHTML = renderHtml;
+            setTimeout(() => {
+                let deleteEles = document.querySelectorAll('.delete-btn');
+                if (deleteEles) {
+                    for (let i = 0; i < deleteEles.length; i++) {
+                        deleteEles[i].addEventListener('click', (e) => {
+                            let target = e.target;
+                            let key = target.getAttribute('key');
+                            deleteProject(key);
+                            renderList();
+                        })
+                    }
+                }
+            }, 100);
+
+        }
+        const { ipcRenderer } = require('electron');
+        window.onload = function () {
+            getEle('new-project').addEventListener('click', (e) => {
+                ipcRenderer.send('jump', `${__dirname}/newProject.html`);
+            });
+            renderList();
+        }
+    </script>
+</body>
+
+</html>

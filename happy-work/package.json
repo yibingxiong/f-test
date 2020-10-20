@@ -1,0 +1,28 @@
+{
+  "name": "happy-work",
+  "version": "1.0.0",
+  "description": "一个ftp工具",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron .",
+    "package:mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --out=out --icon=assets/app-icon/mac/app.icns --osx-sign.identity='Developer ID Application: GitHub' --extend-info=assets/mac/info.plist",
+    "dev": "electron . --debug",
+    "dev:main": "electron --inspect=5858 ."
+  },
+  "repository": "https://github.com/yibingxiong/happy-work",
+  "keywords": [
+    "ftp",
+    "开发工具"
+  ],
+  "author": "yibingxiong",
+  "license": "",
+  "devDependencies": {
+    "electron": "^3.0.4"
+  },
+  "dependencies": {
+    "electron-localstorage": "^1.0.5",
+    "ftp": "^0.3.10",
+    "install": "^0.12.2",
+    "npm": "^6.4.1"
+  }
+}
