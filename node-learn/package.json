@@ -1,0 +1,23 @@
+{
+  "name": "node-learn",
+  "version": "1.0.0",
+  "description": "学习node",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "start": "node chapter1/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yibingxiong/node-learn.git"
+  },
+  "author": "yibingxiong",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yibingxiong/node-learn/issues"
+  },
+  "homepage": "https://github.com/yibingxiong/node-learn#readme",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
