@@ -1,0 +1,65 @@
+<style lang="less">
+    .hover {
+        background: red;
+    }
+    .sc {
+        height: 100rpx;
+    }
+</style>
+
+<template>
+    <view hover-class="hover">
+        <text>hello, bigBear</text>
+        <scroll-view class="sc" scroll-y>
+            <view>
+                <text>1</text>
+                <text>1</text>
+                <text>1</text>
+                <text>1</text>
+            </view>
+            <view>
+                <text>1</text>
+                <text>1</text>
+                <text>1</text>
+                <text>1</text>
+            </view>
+            <view>
+                <text>1</text>
+                <text>1</text>
+                <text>1</text>
+                <text>1</text>
+            </view>
+            <view>
+                <text>1</text>
+                <text>1</text>
+                <text>1</text>
+                <text>1</text>
+            </view>
+            <view>
+                <text>1</text>
+                <text>1</text>
+                <text>1</text>
+                <text>1</text>
+            </view>
+            <view>
+                <text>1</text>
+                <text>1</text>
+                <text>1</text>
+                <text>1</text>
+            </view>
+            <view>
+                <text>1</text>
+                <text>1</text>
+                <text>1</text>
+                <text>1</text>
+            </view>
+        </scroll-view>
+    </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+export default class Logs extends wepy.page {
+    
+}
+</script>

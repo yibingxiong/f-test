@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function t(a) {
+            arguments[0].b = 3;
+            function* test() {
+                yield console.log(arguments);
+            }
+            let ge = test();
+            ge.next();
+        }
+        let a = {};
+        t(a);
+        console.log(a)
+    </script>
+</body>
+</html>

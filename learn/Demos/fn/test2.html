@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>    
+        let fn1 = function () {};
+        let fn2 = () => {};
+        let fn3 = function * () {};
+        let fn4 = async function() {};
+        console.log('依次输出函数对象')
+        console.log({fn1});
+        console.log({fn2});
+        console.log({fn3});
+        console.log({fn4});
+        console.info('依次输出函数的prototype');
+        console.log(fn1.prototype);
+        console.log(fn2.prototype);
+        console.log(fn3.prototype);
+        console.log(fn4.prototype);
+        console.log('输出隐士原型__proto__');
+        console.log(fn1.__proto__);
+        console.log(fn2.__proto__);
+        console.log(fn3.__proto__);
+        console.log(fn4.__proto__);
+        console.log('__proto__的比较');
+        console.log(fn1.__proto__ === Function.prototype);
+        console.log(fn2.__proto__ === Function.prototype);
+        console.log(fn3.__proto__ === Function.prototype);
+        console.log(fn4.__proto__ === Function.prototype);
+        console.log('---------')
+        console.log(fn3.__proto__ === GeneratorFunction)
+    </script>
+</body>
+</html>

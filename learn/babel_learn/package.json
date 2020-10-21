@@ -1,0 +1,19 @@
+{
+  "name": "babel_learn",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel source --out-dir output"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babel-traverse": "^6.26.0",
+    "babylon": "^6.18.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0"
+  }
+}
