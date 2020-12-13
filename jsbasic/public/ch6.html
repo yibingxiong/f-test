@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    //     const b = {
+    //         toString() {
+    //             return '3';
+    //         }
+    //     }
+    //     const c = {
+    //         toString() {
+    //             return '3';
+    //         }
+    //     }
+    //     const a= {
+    //         1: 1,
+    //         b: 3, 
+    //     }
+    //     b.m= 1;
+    //     console.log(a.b);
+    //     console.log(a['1']);
+    //     console.log(a['3']);
+    //     console.log(a.c);
+
+    //     let d = [1,3,4];
+    //    let e = d.valueOf();
+    //    console.log(e)
+    //    for (const m of e) {
+    //        console.log(m)
+    //    }
+    //    console.log(d===e);
+    //    let f = [0,10,6,16]
+    //    const g = f.sort();
+    //    console.log(f);
+    //    console.log(g)
+
+    const buf = new ArrayBuffer(20);
+    console.log(buf.byteLength);
+    const buf2 = buf.slice();
+    const dv1 = new DataView(buf);
+    console.log(dv1.byteLength);
+    console.log(dv1.byteOffset)
+    dv1.setInt8(0, 1);
+    console.log(dv1.getInt8(0))
+    </script>
+</body>
+</html>
