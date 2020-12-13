@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        "use strict"
+        // function Person(name) {
+        //     this.name = name;
+        //     this.sayHello = function() {
+        //         console.log('hello' + this.name)
+        //     }
+        // }
+        // Person('aa');
+        // console.log(window.name)
+
+        // function SuperType() {
+        //     this.colors = [1,2,3];
+        // }
+        // function SubType() {
+        //     SuperType.call(this);
+        // }
+        // let instance1 = new SubType();
+        // instance1.colors.push(4);
+        // let instance2 = new SubType();
+        // console.log(instance1.colors);
+        // console.log(instance2.colors);
+
+        // function SuperType(name) {
+        //     this.name = name;
+        //     this.colors = [1,3,4];
+        // }
+        // SuperType.prototype.sayName = function() {
+        //     console.log(this.name);
+        // }
+        // function SubType (name, age) {
+        //     SuperType.call(this, name);
+        //     this.age = age;
+        // }
+        // SubType.prototype = new SuperType();
+        // SubType.prototype.constructor = SubType;
+
+        // SubType.prototype.sayAge = function() {
+        //     console.log(this.age);
+        // }
+
+        // const instance1 = new SubType('a', 18);
+        // instance1.sayName();
+
+        // function object(o) {
+        //     function F(){}
+        //     F.prototype = o;
+        //     return new F();
+        // }
+
+        // let person = {
+        //     name: 'hello',
+        //     friends: [1,3,4]
+        // }
+        // const aPerson = object(person);
+        // aPerson.friends.push(5);
+        // console.log(person.friends);
+
+        // function createAntor(original) {
+        //     let clone = Object.create(original);
+        //     clone.sayHi = function() {
+        //         console.log('hi')
+        //     }
+
+        //     return clone;
+        // }
+
+        // let person = {
+        //     name: 'aaa',
+        //     friends:[1,3],
+        // }
+
+
+        // const subtype = createAntor(person);
+        // console.log(subtype.name);
+
+        // function inheritProperty(subType, superType) {
+        //     const prototype = Object.create(superType);
+        //     prototype.conctructor = subType;
+        //     subType.prototype = prototype;
+        // }
+
+        // function SuperType(name) {
+        //     this.name = name;
+        //     this.colors = [2,3];
+        // }
+
+        // SuperType.prototype.sayName = function() {
+        //     console.log(this.name);
+        // }
+        // function Subtype(name, age) {
+        //     SuperType.call(this, name);
+        //     this.age = age;
+        // }
+        // inheritProperty(Subtype, SuperType);
+        // Subtype.prototype.sayAge = function() {
+        //     console.log(this.age);
+        // }
+        // class A {
+        //     sayName() {
+        //         console.log('hello')
+        //     }
+        // }
+        // class B extends A {
+        //     constructor() {
+        //         super()
+                
+        //     }
+        //     // sayName() {
+        //     //     super.sayName();
+        //     //     console.log('world')
+        //     // }
+        // }
+        // let b = new B();
+        // b.sayName();
+        // let a = new A();
+        // a.sayName();
+        // console.log(A.prototype.sayName === a.sayName);
+        // console.log(B.prototype === A.prototype)
+
+
+        class Vehicle {}
+
+        let FooMixin = (SuperClass) => class extends SuperClass {
+            foo() {
+                console.log('foo');
+            }
+        }
+        let BarMixin = (SuperClass) => class extends SuperClass {
+            bar() {
+                console.log('bar');
+            }
+        }
+        let BazMixin = (SuperClass) => class extends SuperClass {
+            baz() {
+                console.log('baz');
+            }
+        }
+        function mix(BaseClass, ...Mixins) {
+            return Mixins.reduce((accurator, current) => current(accurator), BaseClass );
+        }
+
+        class Bus extends mix(Vehicle, FooMixin, BarMixin, BazMixin) {
+
+        }
+
+        let b = new Bus();
+        b.foo();
+        b.bar();
+        b.baz();
+    </script>
+</body>
+</html>
