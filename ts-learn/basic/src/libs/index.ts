@@ -1,6 +1,7 @@
 import $ from 'jquery'
 import moduleLib from './module-lib';
 import umdLib from './umd-lib';
+import moment from 'moment';
 
 $('.app').css('color', 'red')
 
@@ -13,7 +14,7 @@ console.log(moduleLib.version)
 umdLib.doSomething();
 console.log(umdLib.version)
 
-import moment from 'moment';
+
 
 
 declare module 'moment' {
