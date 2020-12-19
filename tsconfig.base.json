@@ -1,0 +1,5 @@
+{
+    "files": [
+        "src/compile/index.ts", // 指定编译指定文件
+    ]
+}

@@ -26,9 +26,9 @@ let log4: Log3<string> = log
 
 log4('3')
 
-const a  = log3(10);
+const a3  = log3(10);
 
-console.log(a)
+console.log(a3)
 
 /////////////////////
 
