@@ -112,7 +112,7 @@ function getLanguage(type: Type) {
     }
 }
 
-function test(x: string|number) {
+function test3(x: string|number) {
     if (typeof x === 'string') {
         x.lastIndexOf('a');
     } else {
