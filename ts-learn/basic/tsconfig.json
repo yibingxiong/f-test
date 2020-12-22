@@ -39,7 +39,7 @@
     // 发生错误时不输出任何文件
     "noEmitOnError": true,
     // 不生产成helper函数
-    "noEmitHelpers": true,
+    "noEmitHelpers": false,
     // 通过tslib引入helper函数，
     // "importHelpers": true,                 /* Import emit helpers from 'tslib'. */
     // 降级遍历器实现
