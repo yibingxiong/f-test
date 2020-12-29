@@ -1,5 +1,7 @@
 import React, { Suspense, useState } from 'react';
 import ErrorBoundary from '../../components/ErrorBoundary';
+import FuncComp from './components/FuncComp';
+import TextInput from './components/TextInput';
 import Toolbar from './components/ToolBar';
 import { IThemeContext, IThemes, ThemeContext, themes } from './context';
 
@@ -7,7 +9,8 @@ function TestAdvacedGuides() {
   const [sum, setSum] = useState<number>(0);
   const [DynamicComponent, setDynamicComponent] = useState<React.LazyExoticComponent<React.FC<{ name: string }>>>();
   const [theme, setTheme] = useState<keyof IThemes>('dark');
-
+  const ref = React.createRef<HTMLInputElement>();
+  const ref2 = React.createRef<HTMLInputElement>();
   return (
     <ErrorBoundary>
       <div className="App">
@@ -47,6 +50,18 @@ function TestAdvacedGuides() {
       </ThemeContext.Provider>
 
       {/* TODO: 研究render prop */}
+
+      {/* 测试forwardRef */}
+      
+      <TextInput ref={ref} />
+      <button onClick={() => {
+        if (ref.current) {
+          ref.current.focus();
+        }
+        console.log(ref2.current)
+      }
+      }>获取焦点</button>
+      
     </ErrorBoundary >
   );
 }

@@ -9,5 +9,8 @@ function Toolbar() {
             <ThemedButton2 />
         </div>
     );
+    
 }
+
+
 export default Toolbar;

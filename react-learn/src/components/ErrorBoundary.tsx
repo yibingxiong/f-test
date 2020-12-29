@@ -6,12 +6,14 @@ class ErrorBoundary extends React.Component<{}, { hasError: boolean }> {
   }
 
   static getDerivedStateFromError(error: Error) {
+    console.log('getDerivedStateFromError')
     // 更新 state 使下一次渲染能够显示降级后的 UI
     return { hasError: true };
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     // 你同样可以将错误日志上报给服务器
+    console.log('componentDidCatch')
     console.log(error);
   }
 
