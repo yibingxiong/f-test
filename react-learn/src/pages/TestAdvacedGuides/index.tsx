@@ -1,12 +1,17 @@
 import React, { Suspense, useState } from 'react';
 import ErrorBoundary from '../../components/ErrorBoundary';
 import FuncComp from './components/FuncComp';
+import Modal from './components/Modal';
+import NumberComp from './components/NumberCom';
+import WordAdder from './components/PureComponentTest';
 import TextInput from './components/TextInput';
 import Toolbar from './components/ToolBar';
 import { IThemeContext, IThemes, ThemeContext, themes } from './context';
 
 function TestAdvacedGuides() {
   const [sum, setSum] = useState<number>(0);
+  const [showModal, setShowModal] = useState<boolean>(false)
+
   const [DynamicComponent, setDynamicComponent] = useState<React.LazyExoticComponent<React.FC<{ name: string }>>>();
   const [theme, setTheme] = useState<keyof IThemes>('dark');
   const ref = React.createRef<HTMLInputElement>();
@@ -61,7 +66,24 @@ function TestAdvacedGuides() {
         console.log(ref2.current)
       }
       }>获取焦点</button>
-      
+      <React.Fragment>
+        <div>写着玩</div>
+      </React.Fragment>
+
+      <NumberComp n={''} />
+      <WordAdder />
+      {
+        showModal &&
+        <Modal>
+          <div onClick={(e) => {
+            e.stopPropagation();
+            setShowModal(false);
+          }} style={{background: "#ffffff"}}>我是一个modal</div>
+        </Modal>
+      }
+      <button onClick={() => {
+        setShowModal(!showModal)
+      }}>显示或隐藏modal</button>
     </ErrorBoundary >
   );
 }
