@@ -5,11 +5,11 @@
 ## TODO
 
 
-- [ ]  研究render props https://react.docschina.org/docs/render-props.html
-- [ ] 研究mxin模式存在的问题 https://react.docschina.org/blog/2016/07/13/mixins-considered-harmful.html
-- [ ] 翻译https://calibreapp.com/blog/react-performance-profiling-optimization 文章，基于performance对react的性能调试
+- [x]  研究render props https://react.docschina.org/docs/render-props.html
+- [x] 研究mxin模式存在的问题 https://react.docschina.org/blog/2016/07/13/mixins-considered-harmful.html
+- [x] 翻译https://calibreapp.com/blog/react-performance-profiling-optimization 文章，基于performance对react的性能调试
 - [ ] 研究虚拟化长列表
-- [ ] 研究[React Profiler](https://react.docschina.org/blog/2018/09/10/introducing-the-react-profiler.html)
+- [x] 研究[React Profiler](https://react.docschina.org/blog/2018/09/10/introducing-the-react-profiler.html)
 
 
 
