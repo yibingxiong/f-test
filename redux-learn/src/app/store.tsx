@@ -7,5 +7,6 @@ const store = configureStore({
   },
 });
 
+
 export type CounterDispatch = typeof store.dispatch
 export default store;
