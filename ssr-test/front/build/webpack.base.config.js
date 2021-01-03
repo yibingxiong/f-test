@@ -3,6 +3,7 @@ const path = require('path')
 
 module.exports = {
   entry: './src/index.tsx',
+  mode: 'development',
   output: {
     path: path.join(__dirname, '..', 'dist'),
     filename: '[name]-[chunkhash:8].js',
@@ -16,7 +17,7 @@ module.exports = {
         test: /tsx?$/i,
         use: [
           {
-            loader: 'ts-loader'
+            loader: 'babel-loader'
           },
           {
             loader: 'eslint-loader'
