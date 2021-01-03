@@ -4,7 +4,8 @@ class A {
 
 }
 
-
+let aaaaa = 1;
+console.log(aaaaa.length)
 const b = new A();
 console.log(b.a);
 
