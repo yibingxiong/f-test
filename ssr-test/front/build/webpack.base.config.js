@@ -35,7 +35,7 @@ module.exports = {
     splitChunks: {
       cacheGroups: {
         commons: {
-          filename: 'vendor.js',
+          filename: 'vendor-[chunkhash:8].js',
           test: /[\\/]node_modules[\\/]/,
           chunks: 'all'
         }

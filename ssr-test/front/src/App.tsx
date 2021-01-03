@@ -1,5 +1,6 @@
 import React from 'react';
-
+const a = 1;
+console.log(a);
 
 const  App:React.FC = () => {
   return (
