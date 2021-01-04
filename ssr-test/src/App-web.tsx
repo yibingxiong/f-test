@@ -3,7 +3,6 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Redirect,
 } from 'react-router-dom'
 import loadable from '@loadable/component'
 
@@ -19,7 +18,6 @@ const App: React.FC = () => {
             path="/"
             component={PageA}
           />
-          <Redirect to="/" />
         </Switch>
       </div>
     </Router>

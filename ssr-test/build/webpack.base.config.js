@@ -12,6 +12,7 @@ function registerPlugins(platform) {
   ];
   return plugins;
 }
+
 module.exports = (platform) => {
   return {
     entry: `./src/App-${platform}.tsx`,
