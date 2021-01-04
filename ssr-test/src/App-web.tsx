@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom'
 import loadable from '@loadable/component'
 
-const PageA = loadable(() => import(/* webpackChunkName: "PageA" */ './page/PageA'));
+const PageA = loadable(() => import('./page/PageA'));
 
 const App: React.FC = () => {
   return (

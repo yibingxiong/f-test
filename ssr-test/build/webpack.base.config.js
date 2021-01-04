@@ -15,7 +15,7 @@ function registerPlugins(platform) {
 
 module.exports = (platform) => {
   return {
-    entry: `./src/App-${platform}.tsx`,
+    entry: `./src/index-${platform}.tsx`,
     mode: 'development',
     target: platform,
     output: {
