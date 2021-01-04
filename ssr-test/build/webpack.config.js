@@ -1,9 +1,14 @@
 const { merge } = require('webpack-merge')
 const baseConfig = require('./webpack.base.config')
-const devConfig = require('./webpack.dev.config')
-const prodConfig = require('./webpack.prod.config')
-const isProd = process.env.NODE_ENV === 'production'
-const config = isProd ? prodConfig : devConfig
+
+let config = () => ({});
+
+try {
+    config = require(`./webpack.${process.env.NODE_ENV}.config`)
+} catch(e) {
+    config = () => ({});
+    console.error(e);
+}
 
 const NODE = 'node'
 const WEB = 'web'
