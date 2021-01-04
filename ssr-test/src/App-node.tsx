@@ -17,6 +17,7 @@ export const routes = [
     component: PageA
   }
 ]
+
 type AppFn = (param: StaticRouterProps) => JSX.Element;
 
 const App: AppFn = ({ context, location }) => {

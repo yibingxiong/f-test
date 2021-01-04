@@ -15,7 +15,7 @@ const mainFile = fs.readFileSync(path.join(__dirname, '../dist/node/main.js'), {
 
 const sandbox = {
     require: (p: string) => {
-        if (p) {
+        if (p.indexOf('/') === 0 || p.indexOf('.') === 0) {
             return require(path.join(__dirname, '../dist/node', p))
         }
         return require(p);
@@ -57,10 +57,9 @@ const Router = App({
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 //@ts-ignore
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const a = require(webStats);
 
 const extractor = new ChunkExtractor({
-    stats: a,
+    statsFile: nodeStats,
     entrypoints: ['main']  // 入口entry
 });
 

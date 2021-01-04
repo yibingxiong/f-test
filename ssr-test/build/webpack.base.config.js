@@ -1,7 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const path = require('path')
 const LoadablePlugin = require('@loadable/webpack-plugin')
-
+const nodeExternals = require('webpack-node-externals')
 
 function registerPlugins(platform) {
   const plugins = [
@@ -43,6 +43,7 @@ module.exports = (platform) => {
         }
       ]
     },
+    externals: platform === 'node' ? ['@loadable/component', nodeExternals()] : undefined,
     plugins: registerPlugins(platform),
     optimization: {
       splitChunks: {
