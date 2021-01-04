@@ -27,6 +27,8 @@
   },
   "devDependencies": {
     "@babel/preset-typescript": "^7.12.7",
+    "@loadable/babel-plugin": "^5.13.2",
+    "@loadable/webpack-plugin": "^5.14.0",
     "@types/react-loadable": "^5.5.4",
     "@typescript-eslint/eslint-plugin": "^4.11.1",
     "@typescript-eslint/parser": "^4.11.1",

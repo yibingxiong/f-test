@@ -1,5 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const path = require('path')
+const LoadablePlugin = require('@loadable/webpack-plugin')
 
 module.exports = {
   entry: './src/index.tsx',
@@ -28,6 +29,7 @@ module.exports = {
     ]
   },
   plugins: [
+    new LoadablePlugin(),
     new HtmlWebpackPlugin({
       template: './src/public/index.html'
     })
