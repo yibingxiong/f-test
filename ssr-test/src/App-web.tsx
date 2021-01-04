@@ -4,20 +4,19 @@ import {
   Switch,
   Route,
 } from 'react-router-dom'
-import loadable from '@loadable/component'
+import routes from './routes'
 
-const PageA = loadable(() => import('./page/PageA'));
 
 const App: React.FC = () => {
   return (
     <Router>
       <div className="App">
         <Switch>
-          <Route
-            exact
-            path="/"
-            component={PageA}
-          />
+          {
+            routes.map((route, index) => {
+              return <Route key={index} {...route} />
+            })
+          }
         </Switch>
       </div>
     </Router>

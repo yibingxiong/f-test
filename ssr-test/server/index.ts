@@ -4,7 +4,6 @@ import path from 'path'
 import { renderToString } from 'react-dom/server'
 import fs from 'fs'
 import vm from 'vm'
-// import App from '../src/App-node'
 import express from 'express'
 
 const staticPath = path.join(__dirname, '../dist/web')
@@ -18,6 +17,11 @@ const webStats = path.resolve(
 const app = express();
 
 app.use(express.static(staticPath))
+app.get('/favicon.ico',(req,res) => {
+    res.status(404);
+    res.end('404');
+})
+
 
 // 入口文件
 const mainFile = fs.readFileSync(serverBundleMainFilePath, { encoding: 'utf-8' })
@@ -37,35 +41,13 @@ vm.runInNewContext(mainFile, sandbox);
 const Main = sandbox.module.exports;
 
 const App = Main.default;
-const context = {}
 
-const Router = App({
-    context,
-    location: '/abcdef'
-});
 
 const extractor = new ChunkExtractor({
     statsFile: webStats,
     entrypoints: ['main']  // 入口entry
 });
 
-const html = renderToString(
-    React.createElement(
-        ChunkExtractorManager,
-        { extractor },
-        Router
-    )
-)
-
-console.log(html)
-// You can now collect your script tags
-const scriptTags = extractor.getScriptTags() // or extractor.getScriptElements();
-// You can also collect your "preload/prefetch" links
-const linkTags = extractor.getLinkTags() // or extractor.getLinkElements();
-// And you can even collect your style tags (if you use "mini-css-extract-plugin")
-const styleTags = extractor.getStyleTags() // or extractor.getStyleElements();
-
-// console.log(html)
 
 function generateContext(url: string,) {
     const context: { url?: string } = {}
@@ -90,7 +72,7 @@ function generateHTML(Root: React.ReactNode) {
         )
     )
     const newHtml = template
-        .replace('<!-- server-title -->', extractor.getLinkTags())
+        .replace('<!-- server-link -->', extractor.getLinkTags())
         .replace('<!-- server-title -->', '标题')
         .replace('<!-- server-html -->', html)
         .replace('<!-- server-script -->', extractor.getScriptTags())

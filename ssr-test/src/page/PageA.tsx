@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 const PageA: React.FC = () => {
-  console.log('pageA')
+  console.log('nima')
+  useEffect(() => {
+    setInterval(() => {
+      console.log(Date.now())
+    }, 10000);
+  },[])
   return (
-    <div className="App">
-      <div>页面A</div>
-    </div>
+    <span style={{color: 'red'}}>fdfdfdd</span>
   );
 }
 

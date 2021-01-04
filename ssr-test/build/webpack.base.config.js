@@ -16,12 +16,12 @@ function registerPlugins(platform) {
 module.exports = (platform) => {
   return {
     entry: `./src/index-${platform}.tsx`,
-    mode: 'development',
+    mode: process.env.NODE_ENV,
     target: platform,
     output: {
       path: path.join(__dirname, '..', 'dist', platform),
       filename: `[name]${platform === 'node' ? '' : '-[chunkhash:8]'}.js`,
-      publicPath: `/dist/${platform}/`,
+      publicPath: `/`,
       libraryTarget: platform === 'node' ? 'commonjs2' : undefined,
     },
     resolve: {

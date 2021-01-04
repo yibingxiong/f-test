@@ -5,18 +5,7 @@ import {
   Route,
   StaticRouterProps,
 } from 'react-router-dom'
-import loadable from '@loadable/component'
-// import PageA from './page/PageA'
-
-const PageA = loadable(() => import('./page/PageA'));
-
-
-export const routes = [
-  {
-    path: '/abcdef',
-    component: PageA
-  }
-]
+import routes from './routes'
 
 type AppFn = (param: StaticRouterProps) => JSX.Element;
 
@@ -31,16 +20,21 @@ const App: AppFn = ({ context, location }) => {
         <div className="App">
           <Switch>
             {
-            routes.map((route, index) => {
-              return <Route key={index} {...route} />
-            })
-          }
+              routes.map((route, index) => {
+                return <Route key={index} {...route} />
+              })
+            }
           </Switch>
         </div>
       </Router>
     )
   }
-  return <Root />
+  return (
+    <React.StrictMode>
+      <Root />
+    </React.StrictMode>
+  )
 }
+
 
 export default App;
