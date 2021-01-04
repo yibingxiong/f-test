@@ -5,10 +5,10 @@ const PageA: React.FC = () => {
   useEffect(() => {
     setInterval(() => {
       console.log(Date.now())
-    }, 10000);
+    }, 100);
   },[])
   return (
-    <span style={{color: 'red'}}>fdfdfdd</span>
+    <span style={{color: 'red'}}>5555</span>
   );
 }
 
