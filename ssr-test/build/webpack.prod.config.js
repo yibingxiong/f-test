@@ -1,7 +1,7 @@
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
-module.exports = {
+module.exports = () => ({
     plugins: [
         new CleanWebpackPlugin(),
     ]
-}
+})
