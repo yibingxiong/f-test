@@ -16,5 +16,5 @@ const WEB = 'web'
 const mergeWithPlatform = (platform) => {
     return merge(baseConfig(platform), config(platform))
 }
-module.exports = [mergeWithPlatform(WEB),mergeWithPlatform(NODE)]
+module.exports = [mergeWithPlatform(WEB)]
 

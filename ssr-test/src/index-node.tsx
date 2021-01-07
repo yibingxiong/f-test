@@ -11,10 +11,6 @@ type AppFn = (param: StaticRouterProps) => JSX.Element;
 
 const App: AppFn = ({ context, location }) => {
   const Root = () => {
-    console.log({
-      context,
-      location
-    })
     return (
       <Router context={context} location={location}>
         <div className="App">

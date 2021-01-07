@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development ts-node ./server/index.ts",
+    "dev": "cross-env NODE_ENV=development ts-node ./server/devServer.ts",
     "build": "cross-env NODE_ENV=production webpack --config ./build/webpack.config.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint src --ext .ts,tsx",
@@ -37,6 +37,7 @@
     "@loadable/babel-plugin": "^5.13.2",
     "@loadable/webpack-plugin": "^5.14.0",
     "@types/react-loadable": "^5.5.4",
+    "@types/webpack-hot-middleware": "^2.25.3",
     "@typescript-eslint/eslint-plugin": "^4.11.1",
     "@typescript-eslint/parser": "^4.11.1",
     "babel-loader": "^8.2.2",
@@ -54,6 +55,7 @@
     "webpack-cli": "^4.3.1",
     "webpack-dev-middleware": "^4.0.2",
     "webpack-dev-server": "^3.11.1",
+    "webpack-hot-middleware": "^2.25.0",
     "webpack-merge": "^5.7.3",
     "webpack-node-externals": "^2.5.2"
   }
