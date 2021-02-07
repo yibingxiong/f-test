@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <button id='btn1'>fn1</button>
+  <script>
+    function debounce1(fn, time, immidate) {
+      let timeout = 0;
+      return  function (...args) {
+        const context = this;
+        if (timeout === 0 && immidate) {
+          fn.apply(context, args);
+        }
+        clearTimeout(timeout);
+        timeout = setTimeout(() => {
+          timeout = 0;
+          fn.apply(context, args);
+        }, time);
+      }
+    }
+
+    const fn1 = debounce1(function(e,b) {
+      console.log(new Date().toLocaleString(), e, b, this)
+    }, 1000, true);
+
+    document.getElementById('btn1').onclick = fn1;
+  </script>
+</body>
+
+</html>

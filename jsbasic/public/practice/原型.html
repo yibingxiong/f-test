@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    let c = {
+      m: 1
+    }
+    let a = Object.create(c);
+    a.m = 10;
+    console.log(a.__proto__===c);
+
+    let d = Object.create(null);
+    console.log(d.__proto__)
+
+    let b  = {};
+    console.log(b.__proto__ === Object.prototype)
+    console.log(a.__proto__.__proto__ === Object.prototype)
+  </script>
+</body>
+</html>
