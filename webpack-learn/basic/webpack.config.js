@@ -1,3 +1,6 @@
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const path = require('path');
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 module.exports = {
   module: {
@@ -5,16 +8,30 @@ module.exports = {
       {
         test: /\.js$/,
         use: [{
-          loader: 'babel-loader'
-        }]
+          loader: 'babel-loader',
+        }, 'eslint-loader'],
+      },
+      {
+        test: /\.js$/,
+        enforce: 'pre',
+        include: [path.resolve(__dirname, 'src')], // 指定检查的目录
+        use: ['eslint-loader'],
       },
       {
         test: /\.less$/,
-        use: ['css-loader', 'less-loader']
-      }
-    ]
+        use: ['css-loader', 'less-loader'],
+      },
+      {
+        test: /\.css$/,
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+      },
+    ],
   },
-  optimization: {
-    concatenateModules: false
-  }
-}
+  plugins: [
+    new ESLintPlugin(),
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      chunkFilename: '[id].css',
+    }),
+  ],
+};

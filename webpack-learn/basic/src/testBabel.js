@@ -1,4 +1,4 @@
-import 'core-js'
+import 'core-js';
 
 // const p = new Promise();
 // [1, 2].includes(1);
