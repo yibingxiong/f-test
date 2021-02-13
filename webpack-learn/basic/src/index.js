@@ -1,3 +1,7 @@
-const hello = require('./hello');
+import { createStore } from 'redux';
 
-console.log(hello)
+import('./hello.es').then((res) => {
+  console.log(res);
+});
+
+console.log(createStore);
