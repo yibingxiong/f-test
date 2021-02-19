@@ -1,0 +1,15 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+      {
+          "type": "node",
+          "request": "launch",
+          // 起个名字
+          "name": "调试 webpack",
+          // 工作路径
+          "cwd": "${workspaceFolder}/webpack-learn/webpack-debug",
+          // 被调试文件的路径，以${workspaceFolder}开头
+          "program": "${workspaceFolder}/webpack-learn/webpack-debug/node_modules/webpack-cli/bin/cli.js"
+      }
+  ]
+}

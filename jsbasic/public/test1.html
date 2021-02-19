@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        setTimeout(function out() {
+            console.log('setTimeout suc')
+        }, 0);
+        let p = new Promise(function (resolve, reject) {
+            resolve("成功!");
+        });
+
+
+        p.then(function (successMessage) {
+            console.log("p! " + successMessage);
+        })
+
+
+        let p1 = new Promise(function (resolve, reject) {
+            resolve("成功!");
+        });
+
+
+        p1.then(function (successMessage) {
+            console.log("p1! " + successMessage);
+        });
+        (function aaa() {
+            for (let i = 0; i < 50000; i++) {
+
+            }
+        })()
+
+    </script>
+    </bod>
+
+</html>

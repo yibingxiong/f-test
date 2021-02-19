@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    console.log(typeof 1)     // number
+    console.log(typeof '1')   // string
+    console.log(typeof {})    // object
+    console.log(typeof Symbol('1'))   // symbol
+    console.log(typeof function () { })  // function
+    console.log(typeof true)          // boolean
+    console.log(typeof null)          // object
+    console.log(typeof undefined)     // undefined
+    console.log(typeof []); // object
+    let a = null;
+    console.log(!a && typeof a === 'object'); // true
+    let c;
+    console.log(typeof b) // undefined
+    console.log(typeof c) // undefined
+
+    let foo = 'abc';
+    console.log(Array.prototype.join(foo, '-'));
+
+    let num = 5E10;
+    console.log(num);
+    console.log(num.toExponential())
+
+    console.log(Math.abs(0.1 + 0.2 - 0.3) < Number.EPSILON)
+
+    console.log(Number.MAX_SAFE_INTEGER + '-' + Number.MIN_SAFE_INTEGER);
+
+  </script>
+</body>
+
+</html>

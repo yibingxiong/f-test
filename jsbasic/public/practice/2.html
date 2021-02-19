@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function test(a) {
+      a= 3
+      console.log(arguments);
+      arguments[0] = 10;
+      console.log(a)
+    }
+    test(4)
+
+    // try {
+    //   console.log(1)
+    //   throw new Error('333')
+    // } finally {
+    //   console.log(2)
+    // }
+    let m;
+    console.log(m)
+
+    let obj = {
+      a:1
+    }
+    // Object.observe(obj, function(changes) {
+    //   for(const change of changes) {
+    //     console.log(change)
+    //   }
+    // })
+
+
+    class Parent {
+
+    }
+
+    class Child extends Parent {
+
+    }
+
+    let child = new Child();
+    console.log(Child.__proto__ === Parent)
+  </script>
+</body>
+</html>

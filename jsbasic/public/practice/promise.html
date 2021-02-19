@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    Promise.all = (promises) => {
+      return new Promise((resolve, reject) => {
+        let count = 0;
+        let res = [];
+        for (let i = 0; i < promises.length; i++) {
+          let p = promises[i];
+          Promise.resolve(p).then((t) => {
+            res[i] = t;
+            if (++count === promises.length) {
+              resolve(res);
+            }
+          }, reject);
+        }
+      })
+    }
+
+    Promise.race = (promises) => {
+      return new Promise((resolve, reject) => {
+        for (let p of promises) {
+          Promise.resolve(p).then(resolve, reject);
+        }
+      })
+    }
+
+    Promise.prototype.finally = function (callback) {
+      let P = this.constructor;
+      return this.then(
+        value => P.resolve(callback()).then(() => value),
+        reason => P.resolve(callback()).then(() => { throw reason })
+      );
+    };
+
+    let p1 = new Promise(function (resolve, reject) {
+      setTimeout(function () {
+        resolve(1)
+      }, 1000)
+    })
+    let p2 = new Promise(function (resolve, reject) {
+      setTimeout(function () {
+        resolve(2)
+      }, 2000)
+    })
+    let p3 = new Promise(function (resolve, reject) {
+      setTimeout(function () {
+        resolve(3)
+      }, 3000)
+    })
+    Promise.all([p3, p1, p2]).then(res => {
+      console.log(res) // [3, 1, 2]
+    });
+
+    Promise.race([p3, p2, p1]).then(res => {
+      console.log(res);
+    })
+    p1.finally(() => {
+      console.log('111111111111')
+    }).then(res => {
+      console.log('a', res)
+    })
+  </script>
+</body>
+
+</html>

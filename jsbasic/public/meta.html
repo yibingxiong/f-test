@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>元编程</title>
+</head>
+
+<body>
+  <script>
+    "use strict"
+    function test() {
+      console.log('1111111111111111hello');
+      console.dir('ddddhello');
+      console.error('ddddhello');
+      /* console.log('1111111111111111') */
+    }
+
+    function test2() {
+      test();
+    }
+
+    function foo(x) {
+      if (x <= 1) {
+        return 1;
+      }
+      return (x / 2) + foo(x - 1);
+    }
+
+
+    // foo(123456)
+
+    function bar(x) {
+      
+    }
+
+
+  </script>
+</body>
+
+</html>

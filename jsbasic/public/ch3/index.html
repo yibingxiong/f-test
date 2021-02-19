@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        "use strict";
+        // function test() {
+        //     // a=1;
+        //     console.log(a)
+        //      var a = 1;
+        //      console.log("----2", a);
+        //      var a = 3;
+        //      console.log("---1", a);
+
+
+        // }
+        // test();
+        // // console.log(a);
+        // function test2() {
+        //     if (true) {
+        //         var b = 2;
+        //     }
+        //     console.log(b);
+        // }
+        // test2();
+        // function test3() {
+        //     if(true) {
+        //         let c  = 3;
+        //     }
+        //     console.log(c);
+        // }
+        // // test3();  报错 index.html:34 Uncaught ReferenceError: c is not defined
+
+        // function test4() {
+        //     for(var i = 0; i < 6000; i = i+1000) {
+        //         setTimeout(() => {
+        //             console.log(i);
+        //         }, i);
+        //     }
+        // }
+        // test4();
+
+        // function test5() {
+        //     for (let i = 0; i < 6000; i = i + 1000) {
+        //         setTimeout(() => {
+        //             console.log(i);
+        //         }, i);
+        //     }
+        // }
+        // // test5();
+
+        // function test6() {
+        //     for (var i = 0; i < 6000; i = i + 1000) {
+        //         (function (i) {
+        //             setTimeout(() => {
+        //                 console.log(i);
+        //             }, i);
+        //         })(i)
+
+        //     }
+
+        // }
+
+        // test6();
+
+        // let d = null;
+        // console.log(typeof d)
+        // console.log(typeof c)
+        // console.log(true==1)
+        // let e;
+        // console.log(Boolean(e))
+
+        // console.log(0.05+0.25==0.3)
+        // console.log(Number.isFinite(Number.NEGATIVE_INFINITY))
+        // const a = Symbol('1');
+        // const b = Symbol('2');
+        // console.log(a==b)
+
+        // const o = {
+        //     [a]: '1',
+        //     [b]: '2',
+        //     "c": "3",
+        // }
+
+        // console.log(Object.getOwnPropertyNames(o))
+        // console.log(Object.getOwnPropertySymbols(o))
+        // console.log(Object.getOwnPropertyDescriptors(o))
+        // console.log(Reflect.ownKeys(o))
+
+        // class Emitter {
+        //     constructor(max) {
+        //         this.max = max;
+        //         this.asyncIndex = 0;
+        //     }
+        //     async *[Symbol.asyncIterator]() {
+        //         while (this.asyncIndex < this.max) {
+        //             yield new Promise((resolve) => {
+        //                 setTimeout(() => {
+        //                     resolve(this.asyncIndex++)
+        //                 }, 1000);
+        //             });
+        //         }
+        //     }
+        // }
+
+        // async function test() {
+        //     const e = new Emitter(10);
+
+        //     for await  (const a of e) {
+        //         console.log(a);
+        //     }
+        // }
+
+        // test();
+
+
+        // console.log(null === undefined);
+        // console.log(null == undefined)
+        // const a= new RegExp('a')
+        // console.log(a instanceof RegExp )
+        // console.log(window.a)
+
+        // function test() {
+        //     sum = 1;
+        // }
+        // test();
+        // console.log(window.sum);
+
+        function test2() {
+            console.log(b);
+            var b = 1;
+        }
+        test2();
+    </script>
+</body>
+
+</html>

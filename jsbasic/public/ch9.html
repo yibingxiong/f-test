@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // const target = {
+        //     color: [1,24]
+        // };
+
+        // const proxy = new Proxy(target, {});
+
+        // console.log(target.color);
+        // console.log(proxy.color);
+        // target.color.push(88);
+        // console.log(proxy.color);
+        // console.log(target.color === proxy.color)
+
+        // const target = {
+        //     foo:'bar'
+        // }
+        // const handler = {
+        //     get() {
+        //         return "overide"
+        //     }
+        // }
+
+        // let p  = new Proxy(target, handler);
+        // console.log(p.foo) // overide
+
+
+        // const target = {
+        //     foo: 'bar'
+        // }
+        // const handler = {
+        //     get(trapTarget, property, receiver) {
+        //         console.log(trapTarget === target)
+        //         console.log(receiver === p)
+        //         console.log(property)
+        //         return Reflect.get(...arguments);
+        //     }
+        // }
+
+        // let p = new Proxy(target, handler);
+        // console.log(p.foo);
+        // true
+        // true
+        // foo
+        // bar
+
+
+        // const target = {
+        //     foo: 'bar'
+        // }
+        // const handler = {
+        //     get(trapTarget, property, receiver) {
+        //         return 'overide';
+        //     }
+        // }
+
+        // const { proxy, revoke } = Proxy.revocable(target, handler);
+
+        // console.log(proxy.foo); // overide
+
+        // revoke();
+        // console.log(proxy.foo); // Uncaught TypeError: Cannot perform 'get' on a proxy that has been revoked
+
+        // Reflect.defineProperty();
+        // Reflect.preventExtensions();
+        // Reflect.setPrototypeOf();
+        // Reflect.set();
+        // Reflect.defineProperty();
+
+       
+
+
+
+
+        // function B(a) {
+        //     this.a = a;
+        // }
+
+        // const b = Reflect.construct(B, ['aaaa']);
+        // console.log(b.a); // aaaa
+        // console.log(b.__proto__ === B.prototype) // true
+
+        
+
+
+        // const wm = new WeakMap();
+        // class User {
+        //     constructor(id) {
+        //         wm.set(this, id);
+        //     }
+        //     set id(id) {
+        //         wm.set(this, id);
+        //     }
+        //     get id() {
+        //         return wm.get(this);
+        //     }
+        // }
+
+        // const user  = new User(123);
+        // console.log(user.id); // 123
+
+        // const proxy  = new Proxy(user, {});
+        // console.log(proxy.id); // undefined
+
+
+        const target = new Date();
+        const proxy  = new Proxy(target, {});
+        proxy.getDate();  // Uncaught TypeError: this is not a Date object.
+
+        Reflect.setPrototypeOf()
+    </script>
+</body>
+
+</html>
