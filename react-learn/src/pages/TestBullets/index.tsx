@@ -12,7 +12,7 @@ export default function Demo() {
     const [bullet, setBullet] = useState('');
     useEffect(() => {
         // 给页面中某个元素初始化弹幕屏幕，一般为一个大区块。此处的配置项全局生效
-        let s = new BulletScreen('.screen', { 
+        let s = new BulletScreen('.screen', {
             duration: 5,
             trackHeight: 60,
             pauseOnHover: false,
@@ -23,12 +23,14 @@ export default function Demo() {
         setScreen(s);
         generateBullet(s);
     }, []);
-
-    const generateBullet =(s) => {
+    const getRangeRandom = (min, max) => {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+    }
+    const generateBullet = (s) => {
         s.push(<div>3333</div>)
         setTimeout(() => {
             generateBullet(s)
-        }, Math.floor(1000 * Math.random()) + 1000 );
+        }, Math.floor(1000 * Math.random()) + 1000);
     }
     // 弹幕内容输入事件处理
     const handleChange = ({ target: { value } }) => {
