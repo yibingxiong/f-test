@@ -9,6 +9,8 @@ const UseTS = lazy(() => import('./pages/UseTs'));
 
 const TestRedux = lazy(() => import('./pages/TestRedux'));
 
+const TestBullets = lazy(() => import('./pages/TestBullets'));
+
 
 function App() {
 
@@ -25,6 +27,7 @@ function App() {
             <Route path="/TestAdvacedGuides" component={TestAdvacedGuides} />
             <Route path="/TestRedux" component={TestRedux} />
             <Route path="/UseTS" component={UseTS} />
+            <Route path="/TestBullets" component={TestBullets} />
             <Route component={NoMatch} />
           </Switch>
         </Suspense>
