@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    if (!Function.prototype.softBind) {
+      Function.prototype.softBind = function (context, ...args) {
+        const fn = this;
+        const bound = function (...argsInner) {
+          const obj = (!this || this === window) ? context : this;
+          fn.apply(obj, [...args, ...argsInner]);
+        }
+        bound.prototype = Object.create(fn.prototype);
+        return bound;
+      }
+    }
+
+    function a () {
+
+    }
+
+    console.log(a.__proto__ === Object.prototype)
+
+    const c = {
+      b: 1,
+      d: Symbol(1)
+    }
+
+    Object.defineProperty(c, 'a', {
+      value: '5',
+      enumerable: false
+    })
+
+    console.log(Object.getOwnPropertyDescriptor(c, 'b'))
+
+    console.log(Object.keys(c))
+    console.log(Object.getOwnPropertyNames(c))
+
+    console.log(c.propertyIsEnumerable('b') )
+
+    console.log(c.__proto__)
+    for(let oo in c) {
+      console.log(oo)
+    }
+
+    
+    Array.prototype.some = function(fn) {
+      for(let i = 0; i < this.length; i++) {
+        if (fn(this[i], i, this)) {
+          return true;
+        }
+      }
+      return false;
+    }
+
+    const arr = [1,2,3];
+    console.log(arr.some((v) => v<2));
+    console.log(arr.every((v) => v<2));
+    console.log(arr.forEach((n) => {
+      console.log(n)
+    }))
+    console.log(Object.prototype.toString.call(null))
+    console.log(Object.prototype.toString.call(undefined))
+    console.log(Object.prototype.toString.call([]))
+    console.log(Object.prototype.toString.call({}))
+    console.log(Object.prototype.toString.call(function(){}))
+    tdz = 1;
+    var tdz;
+  </script>
+</body>
+
+</html>
