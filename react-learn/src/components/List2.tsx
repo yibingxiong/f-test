@@ -13,6 +13,12 @@ const List2 = ({
   data,
   distance = 15,
   onReachEnd = () => { },
+  onRefresh = (close) => {
+    console.log('onRefresh')
+    setTimeout(() => {
+      close();
+    }, 2000);
+  }
 }) => {
   let currentPos = 0;
   const scrollWrapper = useRef(null);
@@ -51,27 +57,27 @@ const List2 = ({
     }} ref={scrollWrapper} onScroll={onScroll}>
 
       <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: data.length * itemHeight + 'px' }}></div>
-      <div ref={scrollContent}
+      <div
+        style={{
+          willChange: 'transform',
+        }}
+        ref={scrollContent}
         onTouchStart={(e) => {
           console.log('start')
           const { scrollTop } = scrollWrapper.current
           if (scrollTop === 0) {
             setStatY(e.touches[0].pageY);
             e.stopPropagation();
-            e.preventDefault();
           }
         }}
         onTouchMove={(e) => {
-          
           const pageY = e.touches[0].pageY;
           const dis = pageY - startY;
           currentPos = dis;
-          console.log('dis', dis)
           const { scrollTop } = scrollWrapper.current
           if (dis < 0 || dis > 90 || scrollTop !== 0) {
             return;
           }
-          e.preventDefault();
           e.stopPropagation();
           if (dis > 60) {
             setIsPullRefresh(true);
@@ -80,20 +86,22 @@ const List2 = ({
           }
           scrollContent.current.style.transform = `translateY(${dis}px)`;
         }}
-        onTouchEnd = {(e) => {
+        onTouchEnd={(e) => {
           if (currentPos > 60) {
-
+            onRefresh(() => {
+              scrollContent.current.style.transform = `translateY(${0}px)`;
+            });
           } else {
             scrollContent.current.style.transition = '.2s'
             setTimeout(() => {
               scrollContent.current.style.transition = ''
-          }, 200)
+            }, 200)
             scrollContent.current.style.transform = `translateY(${0}px)`;
             currentPos = 0;
           }
         }}
       >
-        <div style={{ marginTop: '-60px', height: '60px', background: 'red' }}>下拉刷新...</div>
+        <div style={{ lineHeight: '90px', marginTop: '-90px', height: '90px', background: 'red' }}>下拉刷新...</div>
         {
           data.map((item, index) => {
             if (index >= start && index <= end) {
