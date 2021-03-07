@@ -1,15 +1,18 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
 import NoMatch from './components/NoMatch';
-
+import './App.css'
 
 const TestAdvacedGuides = lazy(() => import('./pages/TestAdvacedGuides'));
 
+const Index = lazy(() => import('./pages/Index'));
 const UseTS = lazy(() => import('./pages/UseTs'));
 
 const TestRedux = lazy(() => import('./pages/TestRedux'));
 
 const TestBullets = lazy(() => import('./pages/TestBullets'));
+const TestList = lazy(() => import('./pages/TestList'));
+const TestList2 = lazy(() => import('./pages/TestList2'));
 
 
 function App() {
@@ -17,17 +20,15 @@ function App() {
   return (
     <React.Fragment>
       <Router>
-        <Link to="/">首页</Link><br/>
-        <Link to="/TestAdvacedGuides">测试高级指引</Link><br/>
-        <Link to="/TestRedux">测试使用redux</Link><br/>
-        <Link to="/UseTS">测试使用TS</Link><br/>
         <Suspense fallback={<div>Loading...</div>}>
           <Switch>
-            <Route exact path="/" component={UseTS} />
+            <Route exact path="/" component={Index} />
             <Route path="/TestAdvacedGuides" component={TestAdvacedGuides} />
             <Route path="/TestRedux" component={TestRedux} />
             <Route path="/UseTS" component={UseTS} />
             <Route path="/TestBullets" component={TestBullets} />
+            <Route path="/TestList" component={TestList} />
+            <Route path="/TestList2" component={TestList2} />
             <Route component={NoMatch} />
           </Switch>
         </Suspense>
