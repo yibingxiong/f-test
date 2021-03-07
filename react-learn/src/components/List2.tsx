@@ -4,7 +4,7 @@
 // https://www.jianshu.com/p/39404c94dbd0
 
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 
 const List2 = ({
   renderItem,
@@ -27,13 +27,36 @@ const List2 = ({
   const [start, setStart] = useState(0)
   const [end, setEnd] = useState(0)
   const [startY, setStatY] = useState(0);
-  const [isPullRefresh, setIsPullRefresh] = useState(false);
 
   useEffect(() => {
     setStart(0)
     setVisibleCount(Math.ceil(height / itemHeight))
     setEnd(Math.ceil(height / itemHeight))
   }, [height, itemHeight])
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach((item, index) => {
+        if (item.intersectionRatio > 0.7) {
+          console.log(item.target.firstElementChild?.innerHTML);
+          observer.unobserve(item.target)
+        }
+      });
+      console.log('-----------------')
+
+    }, {
+      threshold: [0.7]  // 只要展现面积达到 70% 的元素 
+    });
+
+    document.querySelectorAll('.list-item')
+      .forEach((item) => {
+        observer.observe(item)
+      });
+
+    return () => {
+      observer.disconnect();
+    }
+  })
 
   const onScroll = () => {
     const { offsetHeight, scrollTop, scrollHeight } = scrollWrapper.current;
@@ -79,11 +102,6 @@ const List2 = ({
             return;
           }
           e.stopPropagation();
-          if (dis > 60) {
-            setIsPullRefresh(true);
-          } else {
-            setIsPullRefresh(false);
-          }
           scrollContent.current.style.transform = `translateY(${dis}px)`;
         }}
         onTouchEnd={(e) => {
@@ -105,7 +123,14 @@ const List2 = ({
         {
           data.map((item, index) => {
             if (index >= start && index <= end) {
-              return renderItem(item, index);
+              const Item = (
+                <div className='list-item' key={index}>
+                  {
+                    renderItem(item, index)
+                  }
+                </div>
+              );
+              return Item;
             }
             return null;
           })
