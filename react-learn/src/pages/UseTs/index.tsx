@@ -16,6 +16,7 @@ export default class UseTs extends React.Component {
             name: string;
             age: number;
         }
+
         const reducer: Reducer<State> = (state: State, action) => {
             switch (action.type) {
                 case 'setAge':
