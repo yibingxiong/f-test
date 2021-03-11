@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    Function.prototype.bind2 = function (context) {
+      return (...args) => {
+        this.apply(context, args)
+      }
+    }
+    function a(a) {
+      console.log(this)
+      console.log(a);
+    }
+    const obj = {
+      m: 1,
+    }
+    const b = a.bind(obj);
+    b(10);
+    const c = a.bind2(obj);
+    c(10);
+  </script>
+</body>
+
+</html>

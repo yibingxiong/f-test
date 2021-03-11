@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    const all = function (promises) {
+      return new Promise((resolve, reject) => {
+        const res = [];
+        let c = 0;
+        for (let i = 0; i < promises.length; i++) {
+          const p = promises[i];
+          Promise.resolve(p)
+            .then(r => {
+              res[i] = r;
+              if (++c === promises.length) {
+                resolve(res);
+              }
+            })
+            .catch(e => {
+              reject(e);
+            })
+        }
+      })
+
+    }
+
+    let p1 = new Promise((resolve, reject) => {
+      console.log(1)
+      setTimeout(() => {
+        resolve(1);
+      }, 10000);
+    })
+    let p2 = new Promise((resolve, reject) => {
+      console.log(2)
+      setTimeout(() => {
+        resolve(2);
+      }, 2000);
+    })
+    let p3 = new Promise((resolve, reject) => {
+      console.log(3)
+      setTimeout(() => {
+        resolve(3);
+      }, 3000);
+    })
+    let p4 = 4;
+
+    // all([p1, p2, p3, p4]).then(res => {
+    //   console.log(res)
+    // })
+    //   .catch(e => {
+    //     console.log(e);
+    //   })
+
+    // Promise.all([p1, p2, p3, p4]).then(res => {
+    //   console.log(res)
+    // })
+    //   .catch(e => {
+    //     console.log(e);
+    //   })
+    const race = function (promises) {
+      return new Promise((resolve, reject) => {
+        for (const p of promises) {
+          Promise.resolve(p).then((r) => {
+            resolve(r);
+          }, (e) => {
+            reject(e);
+          })
+        }
+      })
+    }
+    // race([p1, p2, p3, p4]).then(
+    //   r => {
+    //     console.log('r', r)
+    //   },
+    //   e => {
+    //     console.log('e', e)
+    //   }
+    // )
+
+    // Promise.race([p1, p2, p3, p4]).then(
+    //   r => {
+    //     console.log('r', r)
+    //   },
+    //   e => {
+    //     console.log('e', e)
+    //   }
+    // )
+
+    const none = function (promises) {
+      return new Promise((resolve, reject) => {
+        let c = 0;
+        for (const p of promises) {
+          Promise.resolve(p)
+            .then((r) => {
+              reject();
+            }, (e) => {
+              if (++c === promises.length) {
+                resolve();
+              }
+            })
+        }
+      })
+    }
+    let p5 = new Promise((resolve, reject) => {
+      console.log(5)
+      setTimeout(() => {
+        reject(5);
+      }, 3000);
+    })
+    none([p5])
+      .then(res => {
+        console.log('none resolve', res)
+      })
+      .catch(e => {
+        console.log('none catch', e);
+      })
+
+    const chain = function (promises) {
+      return new Promise((resolve, reject) => {
+        let i = 0;
+        while (i < promises.length) {
+          Promise.resolve(promises[i])
+            .then(
+
+            )
+        }
+      })
+    }
+
+    const promiseMap = function (vals, cb) {
+      return Promise.all(
+        vals.map((v) => {
+          return new Promise((resolve, reject) => {
+            cb(v, resolve);
+          })
+        })
+      )
+    }
+
+    promiseMap([p1, p2, p3], (v, next) => {
+      Promise.resolve(v)
+        .then(res => {
+          console.log(res);
+          next(res);
+        })
+        .catch(e => {
+          console.log(e);
+        })
+    }).then(e => {
+      console.log('done')
+    })
+
+
+    console.time('fibonacci11')
+    const f2 = (n) => {
+      if (n === 0) return 0;
+      if (n === 1) return 1;
+      return f2(n - 1) + f2(n - 2);
+    }
+    f2(40) // 165580141
+    console.timeEnd('fibonacci11')
+
+
+    console.time('fibonacci')
+    const f = (n, prev = 1, next = 1) => {
+      if (n < 2) {
+        return next
+      }
+      return f(n - 1, next, prev + next)
+    }
+    f(1475)
+    console.timeEnd('fibonacci')
+
+
+  </script>
+</body>
+
+</html>

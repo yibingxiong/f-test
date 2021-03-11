@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    "use strict";
+    // 题目1
+    function f1(str) {
+      if (typeof str !== 'string') {
+        return null;
+      }
+      const arr = str.split('.');
+      const res = {};
+      arr.reduce((pre, cur, index) => {
+        if (index === arr.length - 1) {
+          pre[cur] = null;
+        } else {
+          pre[cur] = {};
+        }
+        return pre[cur];
+      }, res);
+      return res;
+    }
+    const a = f1('a.b.c');
+    console.log(a);
+
+
+    // 题目2
+    function request(url) {
+      console.log('请求进来了' + url)
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve(Math.random().toString(32).substr(0, 10))
+        }, 2000);
+      })
+    }
+    const queue = [];
+    let count = 0;
+    const MAX = 3;
+
+    function limitPromise(url) {
+      return new Promise((resolve, reject) => {
+        if (count < MAX) {
+          count++;
+          request(url)
+            .then((res) => {
+              resolve(res);
+              count--;
+              consume();
+            }, (e) => {
+              count--;
+              consume();
+              reject(e)
+            })
+        } else {
+          queue.push(() => request(url).then((res) => {
+            resolve(res);
+            count--;
+            consume();
+          }, (e) => {
+            count--;
+            consume();
+            reject(e)
+          }));
+        }
+      })
+    }
+
+    function consume() {
+      if (queue.length) {
+        if (count < MAX) {
+          const pFn = queue.shift();
+          count++;
+          pFn();
+        }
+      }
+    }
+
+
+    for (let i = 0; i < 10; i++) {
+      limitPromise('aaa')
+        .then(a => {
+          // console.log('----a----', a);
+        })
+    }
+
+
+    // 题目3
+    const ss = `
+12312
+ 
+1  3
+12 3
+`
+
+    function f3(str) {
+      const res = [];
+      if (typeof str !== 'string') {
+        return null;
+      }
+      const a = str.split('\n').filter((i) => !!i.trim()).map((i) => {
+        return [i];
+      })
+      res.push(a);
+
+      console.log(res);
+    }
+    f3(ss);
+
+
+
+    // 第4题
+    function O() {
+      this.x = 1
+      this.print = function () {
+        console.log(this)
+        console.log(this.x)
+      }
+    }
+    var o = new O()
+
+    var print = o.print
+    print()
+
+    var n = { x: 2, print: print }
+    n.print()
+
+    function delay(time) {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve();
+        }, time);
+      })
+    }
+    async function retry(fn, count, time) {
+      let c = 0;
+      async function _retry(c) {
+        try {
+          c++;
+          const res = await fn();
+          return res;
+        } catch (e) {
+          if (c === count) {
+            throw e;
+          } else {
+            await delay(time);
+            _retry(c)
+          }
+        }
+      }
+      return await _retry(0);
+    }
+
+    let c = 0;
+    function testFn() {
+      return new Promise((resolve, reject) => {
+        c++;
+        if (c === 3) {
+          resolve(c);
+        } else {
+          reject(c)
+        }
+      })
+    }
+
+    retry(fn, 4, 1000).then((res) => {
+      console.log('suc', res)
+    }, (e) => {
+      console.log('e', e)
+    });
+  </script>
+</body>
+
+</html>

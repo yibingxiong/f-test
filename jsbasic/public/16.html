@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function bigAdd(a, b) {
+      let i = a.length - 1;
+      let j = b.length - 1;
+      let jinwei = 0;
+      const res = [];
+      while (i >= 0 && j >= 0) {
+        const m = parseInt(a.charAt(i--), 10);
+        const n = parseInt(b.charAt(j--), 10);
+        const k = m + n + jinwei;
+        const mod = k % 10;
+        res.unshift(mod);
+        jinwei = (k - mod) / 10;
+      }
+
+      while (i >= 0) {
+        const m = parseInt(a.charAt(i--), 10);
+        const k = m + jinwei;
+        const mod = k % 10;
+        res.unshift(mod);
+        jinwei = (k - mod) / 10;
+      }
+
+      while (j >= 0) {
+        const m = parseInt(b.charAt(j--), 10);
+        const k = m + jinwei;
+        const mod = k % 10;
+        res.unshift(mod);
+        jinwei = (k - mod) / 10;
+      }
+
+      if (jinwei > 0) {
+        res.unshift(jinwei);
+      }
+      return res.join('');
+    }
+
+    console.log(bigAdd('99999', '2'))
+  </script>
+</body>
+
+</html>

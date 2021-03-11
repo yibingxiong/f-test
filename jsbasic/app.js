@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const fs = require('fs');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -21,6 +22,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/myjs/8.js', (req, res) => {
+  res.contentType('text/javascript');
+  setTimeout(() => {
+    res.send(fs.readFileSync(path.join(__dirname, 'public/javascripts/8.js')))
+  }, 20000);
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
