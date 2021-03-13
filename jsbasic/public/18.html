@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .a {
+      border: 10px solid red;
+      display: flow-root;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .b {
+      height: 100px;
+      /* position: absolute; */
+      width: 100%;
+      background-color: blue;
+    }
+
+
+    HTML CSSResult Skip Results Iframe EDIT ON * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 40px;
+      background-color: #fff;
+      color: #444;
+      font: 1.4em Arial, sans-serif;
+    }
+
+    .outer {
+      background-color: #ccc;
+      margin: 0 0 40px 0;
+    }
+
+    p {
+      padding: 0;
+      margin: 20px 0 20px 0;
+      background-color: rgb(233, 78, 119);
+      color: #fff;
+    }
+
+    .overflow {
+      overflow: auto;
+    }
+    .c {
+      height: 100px;
+      background-color: red;
+      margin: 50px;
+    }
+    .d {
+      height: 100px;
+      background-color: blue;
+      margin: 50px;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="a">
+    <div class="b"></div>
+  </div>
+
+  <h2>no BFC</h2>
+  oooo
+  <div class="outer">
+    <p>I am paragraph one and I have a margin top and bottom of 20px;</p>
+    <p>I am paragraph two and I have a margin top and bottom of 20px;</p>
+  </div>
+
+  <h2>With a BFC</h2>
+
+  <div class="outer overflow">
+    <p>I am paragraph one and I have a margin top and bottom of 20px;</p>
+    <p>I am paragraph two and I have a margin top and bottom of 20px;</p>
+  </div>
+
+  <div class="c">
+
+  </div>
+  <div class="d">
+
+  </div>
+</body>
+
+</html>
