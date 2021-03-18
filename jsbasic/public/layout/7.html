@@ -8,41 +8,33 @@
   <style>
     * {
       margin: 0;
-      padding: 0;
     }
     .main {
-      padding-left: 200px;
-      padding-right: 200px;
-      height: 200px;
+      padding-right: 100px;
       box-sizing: border-box;
     }
     .left {
-      width: 200px;
-      height: 200px;
       background-color: red;
       float: left;
-      margin-left: -200px;
+      width: 100%;
     }
     .right {
-      width: 200px;
-      height: 200px;
       background-color: blue;
+      width: 100px;
       float: left;
-      margin-right: -200px;
+      margin-right: -100px;
     }
-    .center {
-      width: 100%;
-      height: 300px;
-      background-color: yellow;
-      float: left;
+    .main::after {
+      content: '';
+      display: block;
+      clear: both;
     }
   </style>
 </head>
 <body>
   <div class="main">
-    <div class="left"></div>
-    <div class="center"></div>
-    <div class="right"></div>
+    <div class="left">left</div>
+    <div class="right">right<br>right</div>
   </div>
 </body>
 </html>

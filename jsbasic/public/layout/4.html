@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      word-break: break-all;
+    }
+
+    .main {
+      box-sizing: border-box;
+      /* overflow: auto; */
+      width: 100%;
+    }
+
+    .left {
+      width: 150px;
+      background-color: red;
+      float: left;
+      margin-left: -100%;
+    }
+
+    .right {
+      width: 200px;
+      background-color: blue;
+      margin-left: -200px;
+    }
+
+    
+    .main,.left,.right {
+      float: left;
+    }
+
+    .center {
+      margin-left: 150px;
+      margin-right: 200px;
+      background: pink;
+    }
+    .footer {
+      clear: both;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="main">
+    <div class="center">center7777777777777</div>
+  </div>
+  <div class="left">leftleftleftleftleftleftleftleftleftleftleftleftleftleftleftleftleftleftleftleftleftleftleftleftleftleftleftleftleftleft<br />ddddddddddddddd</div>
+  <div class="right">right</div>
+  <div class="footer">
+
+    dddddddddddddddddddd
+  </div>
+</body>
+
+</html>

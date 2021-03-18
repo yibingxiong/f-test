@@ -11,28 +11,28 @@
       padding: 0;
     }
     .main {
-      padding-left: 200px;
+      padding-left: 150px;
       padding-right: 200px;
-      height: 200px;
       box-sizing: border-box;
+      overflow: auto;
     }
     .left {
       width: 200px;
-      height: 200px;
       background-color: red;
       float: left;
-      margin-left: -200px;
+      margin-left: -100%;
+      position: relative;
+      left: -200px;
+      word-break: break-all;
     }
     .right {
       width: 200px;
-      height: 200px;
       background-color: blue;
       float: left;
       margin-right: -200px;
     }
     .center {
       width: 100%;
-      height: 300px;
       background-color: yellow;
       float: left;
     }
@@ -40,9 +40,10 @@
 </head>
 <body>
   <div class="main">
-    <div class="left"></div>
-    <div class="center"></div>
-    <div class="right"></div>
+    <div class="center">7777777777777</div>
+    <div class="left">leftleftleftleftleftleftleftleftleftleftleftleftleftleftleft<br/>ddddddddddddddd</div>
+    <div class="right">right</div>
   </div>
+  dddddddddddddddddddd
 </body>
 </html>
