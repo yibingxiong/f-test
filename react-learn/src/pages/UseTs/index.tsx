@@ -6,6 +6,7 @@ import FuncComponent from './components/FuncComponent'
 import LoadingHOC from './components/HighOrderComponent'
 import RefTest from './components/RefTest';
 import { Action, createStore, Reducer } from '../../lib/MyRedux';
+import axios from 'axios';
 
 export default class UseTs extends React.Component {
 
@@ -44,6 +45,21 @@ export default class UseTs extends React.Component {
     render() {
         return (
             <>
+                <div onClick={() => {
+                   axios.interceptors.request.use(function (config) {
+                    // Do something before request is sent
+                    console.log('----------1', config)
+                    return config;
+                  }, function (error) {
+                    // Do something with request error
+                    return Promise.reject(error);
+                  });
+                  debugger;
+                    axios.get('/index.html')
+                    .then(res=> {
+                        console.log(res.data);
+                    })
+                }}>发送请求1</div>
                 <ClassComponent name="hello" />
                 <FuncComponent name="world" initialValue={100} />
                 <this.Hoc name="hello" loading={true} />
