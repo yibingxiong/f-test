@@ -13,6 +13,7 @@ const TestRedux = lazy(() => import('./pages/TestRedux'));
 const TestBullets = lazy(() => import('./pages/TestBullets'));
 const TestList = lazy(() => import('./pages/TestList'));
 const TestList2 = lazy(() => import('./pages/TestList2'));
+const TestSetState = lazy(() => import('./pages/TestSetState'));
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
             <Route path="/TestBullets" component={TestBullets} />
             <Route path="/TestList" component={TestList} />
             <Route path="/TestList2" component={TestList2} />
+            <Route path="/TestSetState" component={TestSetState} />
             <Route component={NoMatch} />
           </Switch>
         </Suspense>
