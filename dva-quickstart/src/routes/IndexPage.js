@@ -2,9 +2,19 @@ import React from 'react';
 import { connect } from 'dva';
 import styles from './IndexPage.css';
 
-function IndexPage() {
+function IndexPage({ dispatch , example }) {
+
+  console.log('example', example)
   return (
     <div className={styles.normal}>
+      <div onClick={() => {
+        dispatch({
+          type: 'example/save',
+          payload: {
+            hello: 333,
+          },
+        })
+      }}>click</div>
       <h1 className={styles.title}>Yay! Welcome to dva!</h1>
       <div className={styles.welcome} />
       <ul className={styles.list}>
@@ -18,4 +28,8 @@ function IndexPage() {
 IndexPage.propTypes = {
 };
 
-export default connect()(IndexPage);
+export default connect(
+  ({ example }) => ({
+    example
+  })
+)(IndexPage);
