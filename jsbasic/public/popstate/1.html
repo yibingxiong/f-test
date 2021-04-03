@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    页面1
+    <a href="/popstate/2.html">进入2</a>
+    <button id="a">pushState</button>
+    <button id="b">replace push</button>
+    <script>
+        window.addEventListener('popstate', (e) => {
+            console.log(e)
+            alert('popState1')
+        })
+        document.getElementById('a').onclick = () => {
+            history.pushState({}, 'title', '/popstate/2.html')
+        }
+        document.getElementById('b').onclick = () => {
+            history.replaceState({
+                page: 'weixindetail',
+                href: '/popstate/3.html'
+            }, null, '/popstate/3.html');
+            history.pushState({
+                page: 'weixinhome'
+            }, null, "/popstate/1.html");
+        }
+    </script>
+</body>
+
+</html>
