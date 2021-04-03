@@ -14,17 +14,18 @@ class TestSetState extends React.Component {
       count: this.state.count + 1
     })
     console.log('1', this.state.count); // 1 0
-    this.setState({
-      count: this.state.count + 1
-    })
-    console.log('2', this.state.count); // 2 0
-
+    
     setTimeout(() => {
       this.setState({
         count: this.state.count + 1
       })
       console.log('3', this.state.count);  // 3 2
     }, 0);
+    this.setState({
+      count: this.state.count + 1
+    })
+    console.log('2', this.state.count); // 2 0
+
 
     setTimeout(() => {
       this.setState({
@@ -41,4 +42,5 @@ class TestSetState extends React.Component {
   }
 }
 
+React.createElement()
 export default TestSetState;
