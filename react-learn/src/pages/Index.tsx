@@ -1,15 +1,15 @@
 // @ts-nocheck
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
+import {Link } from 'react-router-dom';
 
 const Index = ({ history }) => {
   console.log('history', history)
-  useEffect(() => {
-    history.block((r) => {
-      console.log('aaa', r)
-      return 'Are you sure you want to leave this page?';
-    })
-  }, [])
+  // useEffect(() => {
+  //   history.block((r) => {
+  //     console.log('aaa', r)
+  //     return 'Are you sure you want to leave this page?';
+  //   })
+  // }, [])
   return (
     <>
       <Link to="/">首页</Link><br />
@@ -20,6 +20,8 @@ const Index = ({ history }) => {
       <Link to="/TestList">测试使用TestList</Link><br />
       <Link to="/TestList2">TestList2</Link><br />
       <Link to="/TestSetState">TestSetState</Link><br />
+      <Link to="/LifeCycleTest">LifeCycleTest</Link><br />
+      <Link to="/TestHooks">TestHooks</Link><br />
     </>
   )
 }
