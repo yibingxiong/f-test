@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .button {
+      position: relative;
+    }
+    .button::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: block;
+      width: 200%;
+      height: 200%;
+      border: 1px solid red;
+      transform-origin: left top;
+      transform: scale(0.5, 0.5);
+    }
+  </style>
+</head>
+<body>
+  <div class="button">xx</div>
+</body>
+</html>

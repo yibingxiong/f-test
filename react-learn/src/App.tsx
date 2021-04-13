@@ -16,6 +16,7 @@ const TestList2 = lazy(() => import('./pages/TestList2'));
 const TestSetState = lazy(() => import('./pages/TestSetState'));
 const LifeCycleTest = lazy(() => import('./pages/LifeCycleTest'));
 const TestHooks = lazy(() => import('./pages/TestHooks'));
+const TestEvents = lazy(() => import('./pages/TestEvents'));
 
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
             <Route path="/TestSetState" component={TestSetState} />
             <Route path="/LifeCycleTest" component={LifeCycleTest} />
             <Route path="/TestHooks" component={TestHooks} />
+            <Route path="/TestEvents" component={TestEvents} />
             <Route component={NoMatch} />
           </Switch>
         </Suspense>

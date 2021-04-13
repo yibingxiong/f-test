@@ -22,6 +22,7 @@ const Index = ({ history }) => {
       <Link to="/TestSetState">TestSetState</Link><br />
       <Link to="/LifeCycleTest">LifeCycleTest</Link><br />
       <Link to="/TestHooks">TestHooks</Link><br />
+      <Link to="/TestEvents">TestEvents</Link><br />
     </>
   )
 }
