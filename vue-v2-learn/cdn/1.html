@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app" v-bind:title="title">
+    {{ message }}
+    <div v-if="seen">你看见我了</div>
+    <ul>
+      <todo-item v-for="item in todos" v-bind:todo="item" v-bind:key="item.id"></todo-item>
+    </ul>
+    <button v-on:click="reverseMessage">反转消息</button>
+    <button v-on:click="count+=1">增加</button>
+    <button v-on:click="greet('hello', $event)">hello</button>
+    {{ count }}
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    Vue.component('todo-item', {
+      // todo-item 组件现在接受一个
+      // "prop"，类似于一个自定义 attribute。
+      // 这个 prop 名为 todo。
+      props: ['todo'],
+      template: '<li>{{ todo.text }}</li>'
+    })
+    var app = new Vue({
+      el: '#app',
+      data: {
+        message: 'Hello Vue!',
+        title: new Date(),
+        seen: true,
+        count: 0,
+        todos: [
+          { text: '学习 JavaScript', id: 1 },
+          { text: '学习 Vue', id: 2 },
+          { text: '整个牛项目', id: 3 }
+        ] 
+      },
+      methods: {
+        greet(msg, event) {
+          alert(msg);
+          console.log(event);
+        },
+        reverseMessage: function () {
+          this.message = this.message.split('').reverse().join('')
+        }
+      },
+      created() {
+        console.log('created message is: ' + this.message)
+      },
+      watch: {
+        todos(newTodos, oldTodos) {
+          console.log(newTodos === oldTodos);
+          console.log('newTodos', newTodos);
+          console.log('oldTodos', oldTodos);
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
