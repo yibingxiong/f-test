@@ -1,11 +1,27 @@
-import HelloWorld from './pages/HelloWorld.vue'
-import Home from './pages/Home.vue'
+const  HelloWorld = () => import('./pages/HelloWorld.vue')
+const  Home = () => import('./pages/Home.vue')
+const NotFound = () => import('./pages/404.vue');
 
 const routes = [
   {
-    path: '/',component: Home,
+    name: 'home',
+    path: '/',
+    component: Home,
   },
-  { path: '/hello', component: HelloWorld },
+  {
+    name: 'hello',
+    path: '/hello/:id', 
+    component: HelloWorld,
+  },
+  { 
+    path: '/index', 
+    redirect: { name: 'home' }
+  },
+  {
+    name: '404',
+    path: '*',
+    component: NotFound,
+  },
 ]
 
 export default routes;
