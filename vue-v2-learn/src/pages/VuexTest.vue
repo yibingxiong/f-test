@@ -1,12 +1,14 @@
 <template>
   <div>
     vuex测试页面{{ count }}--{{ countAlis }}--{{ countPlusLocalState }}
+    <div>done todos count {{ doneTodosCount }}</div>
     <button @click="increment">increment</button>
+    <button @click="incrementAsync">incrementAsync</button>
   </div>
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 
 export default {
   name: "VuexTest",
@@ -24,12 +26,13 @@ export default {
         return state.count + this.loalData;
       },
     }),
+    ...mapGetters({
+      doneTodosCount: "doneTodosCount",
+    }),
   },
   methods: {
-    increment() {
-      this.$store.commit("increment");
-      console.log(this.$store.state.count);
-    },
+    ...mapMutations(["increment"]),
+    ...mapActions(['incrementAsync'])
   },
 };
 </script>
