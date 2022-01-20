@@ -4,12 +4,14 @@ import {Link } from 'react-router-dom';
 
 const Index = ({ history }) => {
   console.log('history', history)
-  // useEffect(() => {
-  //   history.block((r) => {
-  //     console.log('aaa', r)
-  //     return 'Are you sure you want to leave this page?';
-  //   })
-  // }, [])
+  useEffect(() => {
+    debugger;
+    history.block((r) => {
+      console.log('aaa', r)
+      return true;
+      // return 'Are you sure you want to leave this page?';
+    })
+  }, [])
   return (
     <>
       <Link to="/">首页</Link><br />

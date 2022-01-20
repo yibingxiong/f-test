@@ -18,7 +18,6 @@ const LifeCycleTest = lazy(() => import('./pages/LifeCycleTest'));
 const TestHooks = lazy(() => import('./pages/TestHooks'));
 const TestEvents = lazy(() => import('./pages/TestEvents'));
 
-
 function App() {
 
   return (
